@@ -3,6 +3,7 @@ import {NightwatchTests} from 'nightwatch';
 import { player1Window, player2Window } from './utils/util';
 import { init } from './utils/gamestart';
 
+import { DiscardCases } from './cases/discard';
 import { WhenPlayedCases } from './cases/when-played';
 import { WhenDefeatCases } from './cases/when-defeat';
 import { AmbushCases } from './cases/ambush';
@@ -35,6 +36,7 @@ const home: NightwatchTests = {
   before: init,
 //regression suite
   ...(process.env.LOCAL_RUN ? LocalTestCase : {}),
+  ...DiscardCases,
   ...WhenPlayedCases,
   ...WhenDefeatCases,
   ...AmbushCases,
