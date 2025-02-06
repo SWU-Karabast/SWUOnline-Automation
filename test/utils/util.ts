@@ -258,3 +258,14 @@ export const cs = {//copied from Constants.php
   NumBountyHuntersPlayed: 73,
   NumPilotsPlayed: 74,
 }
+
+export enum Arena {
+  ground,
+  space,
+}
+
+export enum Zone {
+  hand,
+  resources,
+  discard,
+}

@@ -1,4 +1,5 @@
 import { cards } from '../../utils/cards';
+import { Gameplay } from '../../utils/gameplay';
 import { GameState } from '../../utils/gamestate';
 import {
     com, p,
@@ -165,5 +166,40 @@ export const SpecificSHDCases = {
     await browser.assert.elementPresent(com.EnemySpaceUnit(1));
     await browser.assert.elementPresent(com.EnemyGroundUnit(1));
     await browser.assert.not.elementPresent(com.EnemyGroundUnit(2));
+  },
+  'Jetpack: break the temporary shield of a shielded unit': async function() {
+    //arrange
+    const gameState = new GameState(gameName);
+    await gameState.LoadGameStateLinesAsync();
+    await gameState.ResetGameStateLines()
+      .AddBase(1, cards.SHD.JabbasPalace)
+      .AddBase(2, cards.SOR.ECL)
+      .AddLeader(1, cards.SOR.SabineLeader)
+      .AddLeader(2, cards.SOR.SabineLeader)
+      .FillResources(1, cards.SOR.CraftySmuggler, 8)
+      .FillResources(2, cards.SOR.CraftySmuggler, 8)
+      .AddCardToHand(1, cards.SHD.Jetpack)
+      .AddCardToHand(1, cards.SHD.Jetpack)
+      .AddCardToHand(1, cards.SHD.Jetpack)
+      .AddCardToHand(1, cards.SHD.Jetpack)
+      .AddUnit(1, cards.SHD.L337, true, 0, gameState.SubcardBuilder().AddShield(1, 1).Build())
+      .AddUnit(1, cards.SHD.L337, true, 0, gameState.SubcardBuilder().AddShield(1, 1).Build())
+      .AddUnit(1, cards.SHD.L337, true, 0, gameState.SubcardBuilder().AddShield(1, 1).Build())
+      .AddUnit(2, cards.SOR.BFMarine, true)
+      .AddUnit(2, cards.SOR.BFMarine, true)
+      .AddUnit(2, cards.SOR.BFMarine, true)
+      .FlushAsync(com.BeginTestCallback)
+    ;
+    
+    //act
+    await Gameplay.Start()
+      .PlayFromHand(1)
+      .Debug()
+      .End();
+
+    //assert
+    // await browser.assert.elementPresent(com.EnemySpaceUnit(1));
+    // await browser.assert.elementPresent(com.EnemyGroundUnit(1));
+    // await browser.assert.not.elementPresent(com.EnemyGroundUnit(2));
   }
 }

@@ -128,12 +128,14 @@ export const cards = {
     Finalizer: '9752523457',
     CartelTurncoat: '9108611319',
     LomPyke: '5632569775',
+    L337: '9552605383',
     //upgrades
     TopTarget: '4282425335',
     Darksaber: '3141660491',
     VambraceFlameThrower: '6471336466',
     MandosRifle: '0754286363',
     LegalAuthority: '8877249477',
+    Jetpack: '6117103324',
     //events
     TimelyIntervention: '6847268098',
     NoBargain: '7354795397',
